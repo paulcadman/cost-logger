@@ -1,0 +1,25 @@
+application: cost-logger
+version: v3
+runtime: go
+threadsafe: true
+api_version: go1
+
+handlers:
+# Static assets
+- url: /
+  static_files: dist/index.html
+  upload: dist/index.html
+
+- url: /(.*)
+  static_files: dist/\1
+  upload: dist/(.*)
+
+# Endpoints handler
+- url: /_ah/spi/.*
+  script: _go_app
+
+skip_files:
+- ^node_modules/(.*)$
+- ^src/(.*)$
+- ^(.*/)?.*\.ts$
+- ^(.*/)?.*\.map$

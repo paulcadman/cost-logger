@@ -6,11 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+title = 'app works!';
 
-  public test() {
+  public test(): void {
     require('google-client-api')().then((gapi) => {
-      gapi.client.load('tictactoe', 'v1', () => {}, '//' + window.location.host + '/_ah/api');
+      gapi.client.load('costlogger', 'v1', () => {}, '//' + window.location.host + '/_ah/api');
+      gapi.client.costlogger.cost.list().execute((resp) => console.log(resp));
     });
   }
 }
